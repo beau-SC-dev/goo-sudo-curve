@@ -1,0 +1,16 @@
+[profile.default]
+solc = "0.8.15"
+bytecode_hash = "none"
+optimizer_runs = 1000000
+no_match_test = "FFI"
+
+[profile.intense]
+no_match_test = "FFI"
+
+[profile.intense.fuzz]
+runs = 10000
+
+[profile.ffi]
+ffi = true
+match_test = "FFI"
+no_match_test = "a^"

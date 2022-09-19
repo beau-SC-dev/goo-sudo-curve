@@ -1,0 +1,16 @@
+{
+  "name": "goo-curve",
+  "license": "MIT",
+  "version": "1.0.0",
+  "description": "GOO (Gradual Ownership Optimization) bonding curve for SudoSwap.",
+  "files": [
+    "src/**/*.sol"
+  ],
+  "devDependencies": {
+    "prettier": "^2.7.1",
+    "prettier-plugin-solidity": "^1.0.0-beta.13"
+  },
+  "scripts": {
+    "lint": "prettier --write **.sol"
+  }
+}
