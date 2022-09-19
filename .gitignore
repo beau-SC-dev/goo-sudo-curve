@@ -1,0 +1,11 @@
+/cache
+lib/
+/node_modules
+.vscode
+.github
+/out
+__pycache__
+
+/src/GOObblers/LibGOOWIP.sol
+/src/GooCurveWIP.sol
+/test/GooCurveWIP.t.sol
