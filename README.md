@@ -32,6 +32,7 @@ Curve for g(t) (GOO at time t) where emission multiple = 1, initial balance = 1:
 git clone https://github.com/beau-SC-dev/goo-sudo-curve.git
 cd goo-issuance
 ```
+Install lib/forge=std and lib/solmate as well
 
 ### Run Tests
 
