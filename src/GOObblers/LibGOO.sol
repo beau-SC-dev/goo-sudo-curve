@@ -60,7 +60,6 @@ library LibGOO {
 
         uint256 timeSinceSquaredWad = timeBackWad.mulWadDown(timeBackWad);
 
-        // prettier-ignore
         return ((emissionMultiple * timeSinceSquaredWad)
 
         + (currentBalanceWad << 2)
