@@ -143,7 +143,7 @@ contract GooCurve is ICurve, CurveErrorCodes {
         n = numItems
         --------
         \
-         >      [ -4 * sqrt(gooBalance) * sqrt(emissionMultiple) * (n*1e18) + 4 * gooBalance + emissionMultiple * (n*1e18)^2 ] / 4
+         >      [ -4 * sqrt(gooBalance) * sqrt(emissionMultiple) * (n*1e18) + 4*gooBalance + emissionMultiple * (n*1e18)^2 ] / 4
         /
         --------
         n = 1
