@@ -2,6 +2,10 @@
 
 SudoSwap curve based on GOO (Gradual Ownership Optimization) Issuance. Read the [GOO whitepaper here](https://www.paradigm.xyz/2022/09/goo).
 
+The formula for going backwards on the curve is:
+$$sellPrice = { [+-4 \sqrt{b} sqrt{m} t + 4b + mt^2] / 4}$$
+where m = emissionMultiple, b = currentBalanceWad, and t = time to scale backwards, scaled to 1e18
+
 ### Important Notes
 - This version is only built for "TOKEN" pool types, as it only supports buying.
 - Selling will be necessary, otherwise, by the GOO design, prices will get a bit crazy as NFTs are only bought.
