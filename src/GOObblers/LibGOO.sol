@@ -39,4 +39,39 @@ library LibGOO {
             );
         }
     }
+    
+    /// @notice Compute last goo balance based on current balance, emission multiple, and time to "go back" on the curve by.
+    /// @param emissionMultiple The multiple on emissions to consider when computing the balance.
+    /// @param currentBalanceWad The current balance of GOO, scaled by 1e18.
+    /// @param timeBackWad The time elapsed since the time we want the balance for, scaled by 1e18.
+    function computeLastGOOBalance(
+        uint256 emissionMultiple,
+        uint256 currentBalanceWad,
+        uint256 timeBackWad
+    ) public pure returns (uint256) {
+        /*
+        We know the current balance (result of computeGOOBalance), so we can solve for "lastBalanceWad" 
+        using the same equation used in computeGOOBalance.
+
+        Solving that equation for lastBalanceWad gives us:
+        lastBalanceWad = [ +-4 sqrt(b) sqrt(m) t + 4b + mt^2 ] / 4
+        where m = emissionMultiple, b = currentBalanceWad, and t = timeSinceWad
+        */
+
+        uint256 timeSinceSquaredWad = timeBackWad.mulWadDown(timeBackWad);
+
+        // prettier-ignore
+        return ((emissionMultiple * timeSinceSquaredWad)
+
+        + (currentBalanceWad << 2)
+
+        - (
+            (((currentBalanceWad*1e18).sqrt()).mulWadDown(
+                ((emissionMultiple).sqrt()) * timeBackWad
+            )
+            )
+        << 2)
+        
+        ) >> 2;
+    }
 }
