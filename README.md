@@ -7,7 +7,7 @@ I've added selling. To enable this, we "go backwards" on the GOO curve by a unit
 
 The formula for going backwards on the curve (calculated by solving the GOO equation for 'initial GOO') is:
 $$sellPrice = { {\pm 4 \sqrt{b} \sqrt{m} t + 4b + mt^2} \over 4}$$
-where m = emissionMultiple, b = currentBalanceWad, and t = time to scale backwards, scaled to 1e18.
+- where m = emissionMultiple, b = currentBalanceWad, and t = time to scale backwards, scaled to 1e18.
 We use minus rather than plus, because...well, because it works in testing, and I haven't really considered why yet.
 
 ### Important Notes
