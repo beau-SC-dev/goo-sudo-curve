@@ -127,7 +127,50 @@ contract GooCurve is ICurve, CurveErrorCodes {
             uint256 protocolFee
         )
     {
-        // WIP
-        return (Error.INVALID_NUMITEMS, 0, 0, 0, 0);
+        // Check that items are being sold to the pair
+        if (numItems == 0) {
+            return (Error.INVALID_NUMITEMS, 0, 0, 0, 0);
+        }
+
+        // Get the pair's "GOO balance" and scaler
+        uint256 gooBalance = spotPrice;
+        uint256 scaler = delta;
+
+        /* 
+        Calculate output value
+        This is defined by:
+
+        n = numItems
+        --------
+        \
+         >      [ -4 * sqrt(gooBalance) * sqrt(emissionMultiple) * (n*1e18) + 4 * gooBalance + emissionMultiple * (n*1e18)^2 ] / 4
+        /
+        --------
+        n = 1
+
+        */
+        uint256 outputValueWithoutFee;
+        for (uint256 n = 1; n < numItems + 1; n++) {
+            outputValueWithoutFee += LibGOO.computeLastGOOBalance(
+                emissionMultiple,
+                gooBalance,
+                n * 1e18 // Scale to 1e18
+            );
+        }
+
+        // Divide by scaler to keep pricing in sought after range
+        outputValueWithoutFee = outputValueWithoutFee.fdiv(scaler, FixedPointMathLib.WAD);
+
+        // Subtract fees from amount to send out
+        protocolFee = outputValueWithoutFee.fmul(protocolFeeMultiplier, FixedPointMathLib.WAD);
+        uint256 fee = outputValueWithoutFee.fmul(feeMultiplier, FixedPointMathLib.WAD);
+        outputValue = outputValueWithoutFee - fee - protocolFee;
+
+        // Set the new "GOO balance" and emission multiple
+        newSpotPrice = uint128(LibGOO.computeLastGOOBalance(emissionMultiple, gooBalance, numItems * 1e18)); // Note explicit conversion
+        newDelta = delta; // Scaler must be updated manually
+
+        // If we got all the way here, no math error happened
+        error = Error.OK;
     }
 }
