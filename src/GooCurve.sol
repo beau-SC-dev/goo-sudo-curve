@@ -6,11 +6,7 @@ import {CurveErrorCodes} from "./sudo/CurveErrorCodes.sol";
 import {FixedPointMathLib} from "./sudo/FixedPointMathLib.sol";
 import {LibGOO} from "./GOObblers/LibGOO.sol";
 
-/*
-Note: This version is only built for "TOKEN" pool types, as it only supports buying.
-
-    Check README for more important notes.
-*/
+// Note: Unoptimized. Check README for notes.
 
 /// @author bHeau
 /// @notice GOO-based bonding curve logic for SudoSwap pools (https://www.paradigm.xyz/2022/09/goo)
