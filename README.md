@@ -11,20 +11,14 @@ where m = emissionMultiple, b = currentBalanceWad, and t = time to scale backwar
 We use minus rather than plus, because...well, because it works in testing, and I haven't really considered why yet.
 
 ### Important Notes
-- This version is only built for "TOKEN" pool types, as it only supports buying.
-- Selling will be necessary, otherwise, by the GOO design, prices will get a bit crazy as NFTs are only bought.
-  - Could "go backwards" on the curve by solving
-  $$c = { {mt^2 \over 4} + i + t \sqrt{mi} }$$
-  - For i, where t is numItems scaled to 1e18 and c is the curve's current "GOO balance", and then calculating sell price based on that. 
-  - I started adding a function for this to LibGOO, but didn't finish.
 - Not gas optimized, was written quickly. 
-  - Should try to go from summation using for loop to a closed form version, among other things.
+  - Main fix: Should try to go from summation using for loop to a closed form version.
 - There's a lot of other design choices that could be used here:
-  - Making emission multiple a configurable parameter (spotPrice or delta) rather than a scaler
-  - Creating a custom pair type for Gobblers that directly uses the Gobblers' emission multiple
+  - Making emission multiple a configurable parameter (spotPrice or delta) rather than a scaler.
+  - Creating a custom pair type for Gobblers that directly uses the Gobblers' emission multiple.
 
 ### Design
-- This version is intended to hold some amount of NFTs that can be bought by users
+- Pricing is based on the GOO mechanism's curve.
 - The configurable parameters are: 
   - spotPrice ("current GOO balance")
   - delta ("scaler", which is used to divide pricing down (or up) to a reasonable level depending on preference)
