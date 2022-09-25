@@ -1,7 +1,8 @@
 {
   "name": "goo-curve",
+  "author": "bHeau",
   "license": "MIT",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "GOO (Gradual Ownership Optimization) bonding curve for SudoSwap.",
   "files": [
     "src/**/*.sol"
